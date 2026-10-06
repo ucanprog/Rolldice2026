@@ -44,7 +44,7 @@ fun Dice( modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
 
     ) {
-        Text("請點擊圖片隨機丟骰子\n作者：曾禹嫙 Sandy" )
+        Text("請點擊圖片隨機丟骰子\n作者：曾禹嫙 " )
         Spacer(modifier = Modifier.height(20.dp))
         Image(
             painter = painterResource(id = R.drawable.dice0),
