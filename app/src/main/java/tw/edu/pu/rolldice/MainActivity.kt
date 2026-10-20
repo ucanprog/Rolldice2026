@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.input.pointer.pointerInput
 
 
 class MainActivity : ComponentActivity() {
@@ -66,9 +68,19 @@ fun Dice( modifier: Modifier = Modifier) {
             painter = painterResource(id = diceImages[diceNumber]),
             contentDescription = "Dice",
             modifier = Modifier
-                .clickable {  //點擊時產生 1 到 6 的隨機整數
-                    diceNumber = (1..6).random()
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        onTap = {
+                            // 單擊：產生 1 到 6 的隨機整數
+                            diceNumber = (1..6).random()
+                        },
+                        onDoubleTap = {
+                            // 雙擊：重置為 0 (回到 dice0)
+                            diceNumber = 0
+                        }
+                    )
                 }
+
         )
     }
 }
